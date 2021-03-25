@@ -1,0 +1,7 @@
+ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
+lungime: 19
+cost: 18
+timp solutie: 0.0
+noduri in memorie: 29
+noduri procesate: 37
+
