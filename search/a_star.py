@@ -72,7 +72,10 @@ class NodParcurgere:
 
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
-        self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        try:
+            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        except parser.MalformedInputException as e:
+            raise e
 
     def testeaza_scop(self, nodCurent):
         return nodCurent.info == self.final
@@ -184,8 +187,12 @@ class Graph:  # graful problemei
         elif tip_euristica == "euristica euler":
             return self.euristica_euler(index)
         else:
-            return 10 * currentCost
-
+            # Euristica creste in functie de pozitia copilului in clasa, si e complet independenta
+            # de orice distanta fata de copilul scop. Astfel, exista cazul in care un copil mai apropiat 
+            # de scop va avea o euristica mai mare decat unul mai departat.
+            #
+            # Ridicarea la patrat doar exagereaza diferentele.
+            return index ** 2
 
 def a_star(graph, nrSolutiiCautate, tip_euristica):
     NodParcurgere.is_counting = True
@@ -225,7 +232,17 @@ def a_star(graph, nrSolutiiCautate, tip_euristica):
                 c.insert(i, s)
             else:
                 c.append(s)
+    instantiations = NodParcurgere.total_instantiations
+    deletions = NodParcurgere.total_deletions
 
+    ## Resetting the object counter
+    NodParcurgere.total_instantiations = 0
+    NodParcurgere.total_deletions = 0
+    NodParcurgere.is_counting = False
+    if results == []:
+        return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
+    else:
+        return (results, (instantiations - deletions), instantiations, alg_time)
 
 def a_star_opt(graph, tip_euristica):
     NodParcurgere.is_counting = True
@@ -278,6 +295,14 @@ def a_star_opt(graph, tip_euristica):
                     break
                 i += 1
             c.insert(i, s)
+    instantiations = NodParcurgere.total_instantiations
+    deletions = NodParcurgere.total_deletions
+
+    ## Resetting the object counter
+    NodParcurgere.total_instantiations = 0
+    NodParcurgere.total_deletions = 0
+    NodParcurgere.is_counting = False
+    return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
 
 
 @stopit.threading_timeoutable(default='A* timed out')

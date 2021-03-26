@@ -5,6 +5,7 @@ import stopit
 from search.ucs import ucs_timeout
 from search.a_star import a_star_timeout, a_star_opt_timeout
 from search.ida_star import ida_star_timeout
+from input_parser.parse import MalformedInputException
 
 ## Defaults
 NSOL = 4
@@ -36,38 +37,55 @@ def write_results(result, output_file_path):
         write_out(output_file_path, result)
 
 def run_ucs(file):
-    result = ucs_timeout(os.path.join(INPUT_PATH, file), NSOL, timeout=TIMEOUT)
-    output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "ucs"))
-    output_file_path = os.path.join(output_folder, "output_for_"+file)
-    write_results(result, output_file_path)
+    try:
+        result = ucs_timeout(os.path.join(INPUT_PATH, file), NSOL, timeout=TIMEOUT)
+        output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "ucs"))
+        output_file_path = os.path.join(output_folder, "output_for_"+file)
+        write_results(result, output_file_path)
+    except MalformedInputException as e: ## Daca fisierul de input nu e bine formatat, bail out.
+        print(e)
+        exit()
 
 def run_a_star(file):
     euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "a_star"))
     for euristica in euristici:
-        result = a_star_timeout(os.path.join(INPUT_PATH, file), NSOL, euristica, timeout=TIMEOUT)
-        output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
-        write_results(result, output_file_path)
+        try:
+            result = a_star_timeout(os.path.join(INPUT_PATH, file), NSOL, euristica, timeout=TIMEOUT)
+            output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
+            write_results(result, output_file_path)
+        except MalformedInputException as e:
+            print(e)
+            exit()
 
 def run_a_star_opt(file):
     euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "a_star_opt"))
     for euristica in euristici:
-        result = a_star_opt_timeout(os.path.join(INPUT_PATH, file), euristica, timeout=TIMEOUT)
-        output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
-        write_results(result, output_file_path)
+        try:
+            result = a_star_opt_timeout(os.path.join(INPUT_PATH, file), euristica, timeout=TIMEOUT)
+            output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
+            write_results(result, output_file_path)
+        except MalformedInputException as e:
+            print(e)
+            exit()
 
 def run_ida_star(file):
     euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "ida_star"))
     for euristica in euristici:
-        result = ida_star_timeout(os.path.join(INPUT_PATH, file), NSOL, euristica, timeout=TIMEOUT)
-        output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
-        write_results(result, output_file_path)
+        try:
+            result = ida_star_timeout(os.path.join(INPUT_PATH, file), NSOL, euristica, timeout=TIMEOUT)
+            output_file_path = os.path.join(output_folder, euristica+"_output_for_"+file)
+            write_results(result, output_file_path)
+        except MalformedInputException as e:
+            print(e)
+            exit()
 
+            
 def main():
     """
     Main entrypoint for program

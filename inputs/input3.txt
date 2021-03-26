@@ -1,0 +1,22 @@
+copil-0-0 copil-0-1 copil-0-2 copil-0-3 copil-0-4 copil-0-5 
+copil-1-0 copil-1-1 copil-1-2 copil-1-3 copil-1-4 copil-1-5 
+copil-2-0 copil-2-1 copil-2-2 copil-2-3 copil-2-4 copil-2-5
+copil-3-0 copil-3-1 copil-3-2 copil-3-3 copil-3-4 copil-3-5
+copil-4-0 copil-4-1 copil-4-2 copil-4-3 copil-4-4 copil-4-5
+copil-5-0 copil-5-1 copil-5-2 copil-5-3 copil-5-4 copil-5-5
+copil-6-0 copil-6-1 copil-6-2 copil-6-3 copil-6-4 copil-6-5
+copil-7-0 copil-7-1 copil-7-2 copil-7-3 copil-7-4 copil-7-5
+copil-8-0 copil-8-1 copil-8-2 copil-8-3 copil-8-4 copil-8-5
+copil-9-0 copil-9-1 copil-9-2 copil-9-3 copil-9-4 copil-9-5
+copil-10-0 copil-10-1 copil-10-2 copil-10-3 copil-10-4 copil-10-5
+copil-11-0 copil-11-1 copil-11-2 copil-11-3 copil-11-4 copil-11-5
+copil-12-0 copil-12-1 copil-12-2 copil-12-3 copil-12-4 copil-12-5
+copil-13-0 copil-13-1 copil-13-2 copil-13-3 copil-13-4 copil-13-5
+copil-14-0 copil-14-1 copil-14-2 copil-14-3 copil-14-4 copil-14-5
+suparati
+copil-13-4 copil-13-5
+copil-13-4 copil-14-4
+copil-7-1 copil-8-1
+copil-8-1 copil-9-1
+copil-13-1 copil-13-2
+mesaj: copil-14-5 -> copil-0-0

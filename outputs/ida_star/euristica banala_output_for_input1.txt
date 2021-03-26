@@ -1,0 +1,5 @@
+Nu exista drum
+timp solutie: 0.0
+noduri in memorie: 1
+noduri procesate: 2
+

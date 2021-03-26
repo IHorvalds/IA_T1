@@ -1,5 +1,13 @@
 from functools import reduce
 
+class MalformedInputException(Exception):
+    """Exceptie pentru fisier de input care nu respecta formatul.
+
+    Args:
+        Exception (string): Mesajul de eroare
+    """
+    pass
+
 def parse(input_file):
     """
     Parseaza fisierul primit ca parametru si returneaza
@@ -18,8 +26,8 @@ def parse(input_file):
     clasa = []
     adiacente = []
     suparati = []
-    start = 0
-    final = 0
+    start = None
+    final = None
     _before_suparati = True             # inaintea liniei care separa clasa de copiii suparati
     with open(input_file) as f:
         lines = list(f.readlines())
@@ -70,6 +78,8 @@ def parse(input_file):
 
 
     ## Vector de copii
-    copii = reduce(lambda x, y: x + y, clasa) ## pastram locurile libere ca sa putem potrivi indicii
+    copii = reduce(lambda x, y: x + y, clasa, []) ## pastram locurile libere ca sa putem potrivi indicii
 
+    if copii == [] or start is None or final is None: ## Fisierul e gol sau formatul gresit. Bail out
+        raise MalformedInputException("Malformed input file. Bailing.")
     return start, final, copii, clasa, adiacente

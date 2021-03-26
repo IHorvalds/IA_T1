@@ -2,6 +2,6 @@ ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patri
 lungime: 19
 cost: 18
 timp solutie: 0.0
-noduri in memorie: 29
-noduri procesate: 37
+noduri in memorie: 36
+noduri procesate: 47
 

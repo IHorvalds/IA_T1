@@ -1,0 +1,7 @@
+copil-0-2
+lungime: 1
+cost: 0
+timp solutie: 0.0
+noduri in memorie: 1
+noduri procesate: 16
+

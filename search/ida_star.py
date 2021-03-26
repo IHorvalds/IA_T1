@@ -67,7 +67,11 @@ class NodParcurgere:
 
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
-        self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        try:
+            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        except parser.MalformedInputException as e:
+            raise e
+
 
     def testeaza_scop(self, nodCurent):
         return nodCurent.info == self.final
@@ -145,7 +149,12 @@ class Graph:  # graful problemei
         elif tip_euristica == "euristica euler":
             return self.euristica_euler(index)
         else:
-            return 10 * currentCost
+            # Euristica creste in functie de pozitia copilului in clasa, si e complet independenta
+            # de orice distanta fata de copilul scop. Astfel, exista cazul in care un copil mai apropiat 
+            # de scop va avea o euristica mai mare decat unul mai departat.
+            #
+            # Ridicarea la patrat doar exagereaza diferentele.
+            return index ** 2
 
     # va genera succesorii sub forma de noduri in arborele de parcurgere
     def genereazaSuccesori(self, nodCurent, tip_euristica="banala"):
@@ -201,7 +210,9 @@ def ida_star(gr, nrSolutiiCautate, euristica):
         if rez == "gata":
             break
         if rez == float("inf"):
-            print("Nu exista solutii")
+            if results == []:
+                results.append("Nu exista drum\n")
+                times.append((time.time() - start_time) * 1000)
             break
         limita = rez
 

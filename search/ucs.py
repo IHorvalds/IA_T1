@@ -63,12 +63,15 @@ class NodParcurgere:
         return sir
 
     def __str__(self):
-        return self.info
+        return str(self.info)
 
 
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
-        self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        try:
+            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
+        except parser.MalformedInputException as e:
+            raise e
 
     def testeaza_scop(self, nodCurent):
         return nodCurent.info == self.final
@@ -145,7 +148,18 @@ def uniform_cost(gr, nrSolutiiCautate):
                     break
                 i += 1
             c.insert(i, s)
+    
+    instantiations = NodParcurgere.total_instantiations
+    deletions = NodParcurgere.total_deletions
 
+    ## Resetting the object counter
+    NodParcurgere.total_instantiations = 0
+    NodParcurgere.total_deletions = 0
+    NodParcurgere.is_counting = False
+    if results == []:
+        return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
+    else:
+        return (results, (instantiations - deletions), instantiations, alg_time)
 
 @stopit.threading_timeoutable(default='UCS timed out')
 def ucs_timeout(input_path, NSOL):

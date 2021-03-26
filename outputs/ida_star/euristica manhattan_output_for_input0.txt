@@ -1,19 +1,19 @@
 ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
 lungime: 19
 cost: 18
-timp solutie: 3.995656967163086
+timp solutie: 3.9992332458496094
 ionel > alina v diana v costin v simona < luiza v mihnea > razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
 lungime: 21
 cost: 20
-timp solutie: 4.997014999389648
+timp solutie: 4.998207092285156
 ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu ^ dana > cristian v patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
 lungime: 21
 cost: 20
-timp solutie: 4.997014999389648
+timp solutie: 6.000518798828125
 ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara ^ dora > marin v dragos
 lungime: 21
 cost: 20
-timp solutie: 5.995512008666992
+timp solutie: 6.000518798828125
 noduri in memorie: 1
 noduri procesate: 512
 

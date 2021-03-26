@@ -1,0 +1,19 @@
+copil-14-5 < copil-14-4 << copil-14-3 < copil-14-2 << copil-14-1 ^ copil-13-1 ^ copil-12-1 ^ copil-11-1 ^ copil-10-1 ^ copil-9-1 < copil-9-0 ^ copil-8-0 ^ copil-7-0 ^ copil-6-0 ^ copil-5-0 ^ copil-4-0 ^ copil-3-0 ^ copil-2-0 ^ copil-1-0 ^ copil-0-0
+lungime: 20
+cost: 19
+timp solutie: 7.102394104003906
+copil-14-5 < copil-14-4 << copil-14-3 < copil-14-2 << copil-14-1 ^ copil-13-1 ^ copil-12-1 ^ copil-11-1 ^ copil-10-1 < copil-10-0 ^ copil-9-0 ^ copil-8-0 ^ copil-7-0 ^ copil-6-0 ^ copil-5-0 ^ copil-4-0 ^ copil-3-0 ^ copil-2-0 ^ copil-1-0 ^ copil-0-0
+lungime: 20
+cost: 19
+timp solutie: 7.202267646789551
+copil-14-5 < copil-14-4 << copil-14-3 < copil-14-2 << copil-14-1 ^ copil-13-1 ^ copil-12-1 ^ copil-11-1 < copil-11-0 ^ copil-10-0 ^ copil-9-0 ^ copil-8-0 ^ copil-7-0 ^ copil-6-0 ^ copil-5-0 ^ copil-4-0 ^ copil-3-0 ^ copil-2-0 ^ copil-1-0 ^ copil-0-0
+lungime: 20
+cost: 19
+timp solutie: 7.302236557006836
+copil-14-5 < copil-14-4 << copil-14-3 < copil-14-2 << copil-14-1 ^ copil-13-1 ^ copil-12-1 < copil-12-0 ^ copil-11-0 ^ copil-10-0 ^ copil-9-0 ^ copil-8-0 ^ copil-7-0 ^ copil-6-0 ^ copil-5-0 ^ copil-4-0 ^ copil-3-0 ^ copil-2-0 ^ copil-1-0 ^ copil-0-0
+lungime: 20
+cost: 19
+timp solutie: 7.402253150939941
+noduri in memorie: 1957
+noduri procesate: 1957
+

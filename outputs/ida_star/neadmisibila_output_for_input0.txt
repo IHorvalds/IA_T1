@@ -1,19 +1,5 @@
-ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
-lungime: 19
-cost: 18
-timp solutie: 12.98832893371582
-ionel > alina v diana v costin v simona < luiza v mihnea > razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
-lungime: 21
-cost: 20
-timp solutie: 15.987873077392578
-ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu ^ dana > cristian v patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara > dragos
-lungime: 21
-cost: 20
-timp solutie: 16.98780059814453
-ionel > alina v diana v costin v simona v razvan v andrei >> oana ^ radu > patricia v victor v nicoleta >> maria > gabi ^ dorel ^ elena < gigel ^ tamara ^ dora > marin v dragos
-lungime: 21
-cost: 20
-timp solutie: 16.98780059814453
+Nu exista drum
+timp solutie: 54.03566360473633
 noduri in memorie: 1
-noduri procesate: 1570
+noduri procesate: 4745
 
