@@ -68,8 +68,8 @@ class NodParcurgere:
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
         try:
-            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
-        except parser.MalformedInputException as e:
+            self.start, self.final, self.copii, self.adiacente = parser.parse(nume_fisier)
+        except Exception as e:
             raise e
 
 
@@ -119,15 +119,15 @@ class Graph:  # graful problemei
 
         return abs(final_column - column) + abs(final_row - row)
 
-    def euristica_euler(self, index):
+    def euristica_euclidiana(self, index):
         """
-        Euristica Euleriana
+        Euristica Euclidiana
 
         Args:
             index ([int]): Din index-ul in lista de copii putem creea "coordonatele" in clasa.
 
         Returns:
-            [float]: Distanta euleriana dintre punctul care se afla la ```index``` si punctul final. 
+            [float]: Distanta euclidiana dintre punctul care se afla la ```index``` si punctul final. 
         """
         row = index // 6
         column = index % 6
@@ -146,8 +146,8 @@ class Graph:  # graful problemei
             return 0
         elif tip_euristica == "euristica manhattan":
             return self.euristica_manhattan(index)
-        elif tip_euristica == "euristica euler":
-            return self.euristica_euler(index)
+        elif tip_euristica == "euristica euclidiana":
+            return self.euristica_euclidiana(index)
         else:
             # Euristica creste in functie de pozitia copilului in clasa, si e complet independenta
             # de orice distanta fata de copilul scop. Astfel, exista cazul in care un copil mai apropiat 
@@ -162,7 +162,6 @@ class Graph:  # graful problemei
             """
 
             Args:
-                indexCopil1(integer): indexul copilului de la care ar pleaca mesajul in self.copii
                 indexCopil2(integer): indexul copilului la care ar ajunge mesajul in self.copii
             
             Verificam ca mai exista cel putin 1 copil caruia nodul curent poate
@@ -193,9 +192,10 @@ class Graph:  # graful problemei
             sir += "{} = {}\n".format(k, v)
         return sir
 
-
+max_nodes = 0
 
 def ida_star(gr, nrSolutiiCautate, euristica):
+    global max_nodes
     NodParcurgere.is_counting = True
     start_time = time.time()
     results = []
@@ -217,18 +217,21 @@ def ida_star(gr, nrSolutiiCautate, euristica):
         limita = rez
 
     instantiations = NodParcurgere.total_instantiations
-    deletions = NodParcurgere.total_deletions
 
     ## Resetting the object counter
     NodParcurgere.total_instantiations = 0
     NodParcurgere.total_deletions = 0
     NodParcurgere.is_counting = False
 
-    return (results, (instantiations - deletions), instantiations, times)
+    _max_nodes = max_nodes
+    max_nodes = 0
+
+    return (results, _max_nodes, instantiations, times)
 
 
 def construieste_drum(gr, nodCurent, limita, nrSolutiiCautate, euristica, times, start_time, results):
-
+    global max_nodes
+    max_nodes = max(NodParcurgere.total_instantiations - NodParcurgere.total_deletions, max_nodes)
     if nodCurent.estimare > limita:
         return nrSolutiiCautate, nodCurent.estimare
     if gr.testeaza_scop(nodCurent) and nodCurent.estimare == limita:

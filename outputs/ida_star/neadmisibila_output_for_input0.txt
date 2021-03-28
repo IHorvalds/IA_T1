@@ -1,5 +1,5 @@
 Nu exista drum
-timp solutie: 54.03566360473633
-noduri in memorie: 1
+timp solutie: 82.0000171661377
+noduri in memorie: 41
 noduri procesate: 4745
 

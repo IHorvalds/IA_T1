@@ -69,8 +69,8 @@ class NodParcurgere:
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
         try:
-            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
-        except parser.MalformedInputException as e:
+            self.start, self.final, self.copii, self.adiacente = parser.parse(nume_fisier)
+        except Exception as e:
             raise e
 
     def testeaza_scop(self, nodCurent):
@@ -119,9 +119,12 @@ def uniform_cost(gr, nrSolutiiCautate):
     start_time = time.time() # Inceputul algoritmului
     c = [NodParcurgere(gr.start, 0, None)]
 
+    max_noduri = 0
+
     results = []
 
     while len(c) > 0:
+        max_noduri = max(NodParcurgere.total_instantiations - NodParcurgere.total_deletions, max_noduri)
         nodCurent = c.pop(0)
 
         if gr.testeaza_scop(nodCurent):
@@ -139,7 +142,7 @@ def uniform_cost(gr, nrSolutiiCautate):
                 NodParcurgere.total_deletions = 0
                 NodParcurgere.is_counting = False
 
-                return (results, (instantiations - deletions), instantiations, alg_time)
+                return (results, max_noduri, instantiations, alg_time)
         lSuccesori = gr.genereazaSuccesori(nodCurent)
         for s in lSuccesori:
             i = 0
@@ -157,9 +160,9 @@ def uniform_cost(gr, nrSolutiiCautate):
     NodParcurgere.total_deletions = 0
     NodParcurgere.is_counting = False
     if results == []:
-        return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
+        return (["Nu exista cale\n"], max_noduri, instantiations, [(time.time() - start_time) * 1000])
     else:
-        return (results, (instantiations - deletions), instantiations, alg_time)
+        return (results, max_noduri, instantiations, alg_time)
 
 @stopit.threading_timeoutable(default='UCS timed out')
 def ucs_timeout(input_path, NSOL):

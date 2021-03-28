@@ -2,6 +2,6 @@ copil-0-2
 lungime: 1
 cost: 0
 timp solutie: 0.0
-noduri in memorie: 4
+noduri in memorie: 6
 noduri procesate: 7
 

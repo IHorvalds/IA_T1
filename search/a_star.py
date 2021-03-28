@@ -73,8 +73,8 @@ class NodParcurgere:
 class Graph:  # graful problemei
     def __init__(self, nume_fisier):
         try:
-            self.start, self.final, self.copii, self.clasa, self.adiacente = parser.parse(nume_fisier)
-        except parser.MalformedInputException as e:
+            self.start, self.final, self.copii, self.adiacente = parser.parse(nume_fisier)
+        except Exception as e:
             raise e
 
     def testeaza_scop(self, nodCurent):
@@ -110,7 +110,6 @@ class Graph:  # graful problemei
             """
 
             Args:
-                indexCopil1(integer): indexul copilului de la care ar pleaca mesajul in self.copii
                 indexCopil2(integer): indexul copilului la care ar ajunge mesajul in self.copii
             
             Verificam ca mai exista cel putin 1 copil caruia nodul curent poate
@@ -157,15 +156,15 @@ class Graph:  # graful problemei
 
         return abs(final_column - column) + abs(final_row - row)
 
-    def euristica_euler(self, index):
+    def euristica_euclidiana(self, index):
         """
-        Euristica Euleriana
+        Euristica Euclidiana
 
         Args:
             index ([int]): Din index-ul in lista de copii putem creea "coordonatele" in clasa.
 
         Returns:
-            [float]: Distanta euleriana dintre punctul care se afla la ```index``` si punctul final. 
+            [float]: Distanta euclidiana dintre punctul care se afla la ```index``` si punctul final. 
         """
         row = index // 6
         column = index % 6
@@ -184,8 +183,8 @@ class Graph:  # graful problemei
             return 0
         elif tip_euristica == "euristica manhattan":
             return self.euristica_manhattan(index)
-        elif tip_euristica == "euristica euler":
-            return self.euristica_euler(index)
+        elif tip_euristica == "euristica euclidiana":
+            return self.euristica_euclidiana(index)
         else:
             # Euristica creste in functie de pozitia copilului in clasa, si e complet independenta
             # de orice distanta fata de copilul scop. Astfel, exista cazul in care un copil mai apropiat 
@@ -200,8 +199,10 @@ def a_star(graph, nrSolutiiCautate, tip_euristica):
     alg_time = []
     start_time = time.time() # Inceputul algoritmului
     results = []
+    max_noduri = 0
 
     while len(c) > 0:
+        max_noduri = max(NodParcurgere.total_instantiations - NodParcurgere.total_deletions, max_noduri)
         nodCurent = c.pop(0)
 
         if graph.testeaza_scop(nodCurent):
@@ -219,7 +220,7 @@ def a_star(graph, nrSolutiiCautate, tip_euristica):
                 NodParcurgere.total_deletions = 0
                 NodParcurgere.is_counting = False
 
-                return (results, (instantiations - deletions), instantiations, alg_time)
+                return (results, max_noduri, instantiations, alg_time)
         lSuccesori = graph.genereazaSuccesori(nodCurent, tip_euristica=tip_euristica)
         for s in lSuccesori:
             i = 0
@@ -240,9 +241,9 @@ def a_star(graph, nrSolutiiCautate, tip_euristica):
     NodParcurgere.total_deletions = 0
     NodParcurgere.is_counting = False
     if results == []:
-        return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
+        return (["Nu exista cale\n"], max_noduri, instantiations, [(time.time() - start_time) * 1000])
     else:
-        return (results, (instantiations - deletions), instantiations, alg_time)
+        return (results, max_noduri, instantiations, alg_time)
 
 def a_star_opt(graph, tip_euristica):
     NodParcurgere.is_counting = True
@@ -251,7 +252,10 @@ def a_star_opt(graph, tip_euristica):
 
     start_time = time.time()
 
+    max_noduri = 0
+
     while len(c) > 0:
+        max_noduri = max(NodParcurgere.total_instantiations - NodParcurgere.total_deletions, max_noduri)
         nodCurent = c.pop(0)
         closed.append(nodCurent)
 
@@ -265,7 +269,7 @@ def a_star_opt(graph, tip_euristica):
             NodParcurgere.total_deletions = 0
             NodParcurgere.is_counting = False
 
-            return ([nodCurent.afisDrum()], (instantiations - deletions), instantiations, [t * 100])
+            return ([nodCurent.afisDrum()], max_noduri, instantiations, [t * 100])
 
         lSuccesori = graph.genereazaSuccesori(nodCurent, tip_euristica)
         lSuccesoriCopy = lSuccesori.copy()
@@ -302,7 +306,7 @@ def a_star_opt(graph, tip_euristica):
     NodParcurgere.total_instantiations = 0
     NodParcurgere.total_deletions = 0
     NodParcurgere.is_counting = False
-    return (["Nu exista cale\n"], (instantiations - deletions), instantiations, [(time.time() - start_time) * 1000])
+    return (["Nu exista cale\n"], max_noduri, instantiations, [(time.time() - start_time) * 1000])
 
 
 @stopit.threading_timeoutable(default='A* timed out')

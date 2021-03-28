@@ -1,7 +1,7 @@
 copil-14-5 ^ copil-13-5 ^ copil-12-5 < copil-12-4 v copil-13-4 << copil-13-3 < copil-13-2 v copil-14-2 << copil-14-1 ^ copil-13-1 ^ copil-12-1 ^ copil-11-1 ^ copil-10-1 ^ copil-9-1 < copil-9-0 ^ copil-8-0 ^ copil-7-0 ^ copil-6-0 ^ copil-5-0 ^ copil-4-0 ^ copil-3-0 ^ copil-2-0 ^ copil-1-0 ^ copil-0-0
 lungime: 24
 cost: 23
-timp solutie: 0.1999378204345703
+timp solutie: 0.19998550415039062
 noduri in memorie: 88
 noduri procesate: 140
 

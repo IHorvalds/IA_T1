@@ -8,6 +8,14 @@ class MalformedInputException(Exception):
     """
     pass
 
+class EarlyNoSolution(Exception):
+    """Exceptie pentru cazul in care e trivial de verificat ca 
+
+    Args:
+        Exception (string): Mesajul de eroare
+    """
+    pass
+
 def parse(input_file):
     """
     Parseaza fisierul primit ca parametru si returneaza
@@ -46,6 +54,9 @@ def parse(input_file):
                     suparati.append((l[0], l[1]))
 
     ## Construim adiacentele
+    ##
+    ## len(clasa) = numarul de randuri din clasa. 
+    ## 6 copii pe fiecare rand => numarul de copii = 6 * len(clasa)
     adiacente = list([0] * (6 * len(clasa)) for _ in range(6 * len(clasa)))
 
     def _nesuparati(copil1, copil2):
@@ -82,4 +93,11 @@ def parse(input_file):
 
     if copii == [] or start is None or final is None: ## Fisierul e gol sau formatul gresit. Bail out
         raise MalformedInputException("Malformed input file. Bailing.")
-    return start, final, copii, clasa, adiacente
+    
+    start_index = copii.index(start)
+    final_index = copii.index(final)
+    
+    if sum(adiacente[start_index]) < 1 or sum(adiacente[final_index]) < 1:
+        raise EarlyNoSolution("Nu poate exista o solutie.")
+
+    return start, final, copii, adiacente

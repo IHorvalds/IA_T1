@@ -5,7 +5,7 @@ import stopit
 from search.ucs import ucs_timeout
 from search.a_star import a_star_timeout, a_star_opt_timeout
 from search.ida_star import ida_star_timeout
-from input_parser.parse import MalformedInputException
+from input_parser.parse import MalformedInputException, EarlyNoSolution
 
 ## Defaults
 NSOL = 4
@@ -44,10 +44,11 @@ def run_ucs(file):
         write_results(result, output_file_path)
     except MalformedInputException as e: ## Daca fisierul de input nu e bine formatat, bail out.
         print(e)
-        exit()
+    except EarlyNoSolution as ens:
+        print(e)
 
 def run_a_star(file):
-    euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
+    euristici = ["euristica banala", "euristica manhattan", "euristica euclidiana", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "a_star"))
     for euristica in euristici:
@@ -57,10 +58,11 @@ def run_a_star(file):
             write_results(result, output_file_path)
         except MalformedInputException as e:
             print(e)
-            exit()
+        except EarlyNoSolution as ens:
+            print(e)
 
 def run_a_star_opt(file):
-    euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
+    euristici = ["euristica banala", "euristica manhattan", "euristica euclidiana", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "a_star_opt"))
     for euristica in euristici:
@@ -70,10 +72,11 @@ def run_a_star_opt(file):
             write_results(result, output_file_path)
         except MalformedInputException as e:
             print(e)
-            exit()
+        except EarlyNoSolution as ens:
+            print(e)
 
 def run_ida_star(file):
-    euristici = ["euristica banala", "euristica manhattan", "euristica euler", "neadmisibila"]
+    euristici = ["euristica banala", "euristica manhattan", "euristica euclidiana", "neadmisibila"]
 
     output_folder = get_or_create_folder(os.path.join(OUTPUT_PATH, "ida_star"))
     for euristica in euristici:
@@ -83,7 +86,8 @@ def run_ida_star(file):
             write_results(result, output_file_path)
         except MalformedInputException as e:
             print(e)
-            exit()
+        except EarlyNoSolution as ens:
+            print(e)
 
             
 def main():
@@ -91,7 +95,7 @@ def main():
     Main entrypoint for program
     
     Usage:
-    message --[OPTIONS]=[VALUES]
+    python3 message.py --[OPTIONS]=[VALUES]
 
     Options:
     --i     Path at which to look for input files.
@@ -108,7 +112,7 @@ def main():
     
     --s     Number of solutions to compute per algorithm, per
             input.
-            Default: 1
+            Default: 4
 
     --h     Print this message
     """
